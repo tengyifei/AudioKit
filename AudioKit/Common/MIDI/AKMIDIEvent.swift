@@ -301,10 +301,16 @@ public struct AKMIDIEvent {
             AKLog("sysex")
             break
         case .songPosition:
+            while internalData.count < 3 {
+                internalData.append(0)
+            }
             internalData[1] = byte1.lower7bits()
             internalData[2] = byte2.lower7bits()
             setLength(3)
         case .songSelect:
+            while internalData.count < 2 {
+                internalData.append(0)
+            }
             internalData[1] = byte1.lower7bits()
             setLength(2)
         default:
